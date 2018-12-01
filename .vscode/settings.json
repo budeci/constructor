@@ -1,0 +1,6 @@
+{
+  "stylusSupremacy.insertNewLineAroundBlocks": "root",
+  "stylusSupremacy.insertNewLineAroundImports": false,
+  "stylusSupremacy.insertSpaceAfterComma": false,
+  "stylusSupremacy.reduceMarginAndPaddingValues": true,
+}
