@@ -51,6 +51,16 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+                loader: 'file-loader',
+                options: {
+                    emitFile: true,
+                    publicPath: '../img/',
+                    name: '[hash].[ext]?v=1',
+                    outputPath: './img/'
+                }
             }
         ]
     },
@@ -63,10 +73,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "css/style.min.css",
         }),
-        new CopyWebpackPlugin([{
-            from: "src/img/",
-            to: "img/"
-        }, ]),
+        // new CopyWebpackPlugin([{
+        //     from: "src/img/",
+        //     to: "img/"
+        // }, ]),
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             optipng: {
