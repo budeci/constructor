@@ -35,6 +35,10 @@ module.exports = {
     devtool: ENV === 'production' ? false : 'inline-sourcemap',
     module: {
         rules: [{
+                test: /(\.jsx?$|\.js?$)/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+            }, {
                 test: /\.styl$/,
                 use: [
                     MiniCssExtractPlugin.loader,

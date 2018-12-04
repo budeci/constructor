@@ -5,7 +5,7 @@
             "targets": {
                 "chrome": "28",
                 "firefox": "43",
-                "ie": "11",
+                "ie": "11"
             }
         }]
     ],
@@ -14,8 +14,8 @@
             "legacy": true
         }],
         ["module-resolver", {
-            "root": ["./src/js"],
+            "root": ["./src/js"]
         }],
         "@babel/plugin-proposal-object-rest-spread"
     ]
-},
+}
