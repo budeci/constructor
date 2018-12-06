@@ -11,6 +11,8 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="stylesheet" type="text/css" href="./dist/css/style.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="./dist/bower_components/touchcarousel/touchcarousel.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <!-- Place favicon.ico in the root directory -->
 
@@ -31,105 +33,122 @@
                             <div id="step2" class="padding_top_crea" style="display:none"></div>
                             <div id="step3">
                                 <div id="fixed_bracciale">
+                                    <div id="crea_bracciale">Create your<br>
+                                        <div>Composable Classic</div>
+                                    </div>
+                                    <div id="riepilogo_bracciale">
+                                        <div id="rie_tot">Base € 12.2 + 0 Link € 0 = <b>€ 15.20</b></div>
+                                        <div id="active_riepilogo_bracciale">
+                                        </div>
+                                        <div id="riepilogo_tessere"></div>
+                                    </div>
                                     <div class="container_zoom"></div>
                                     <div id="container_bracciale">
+                                        <div id="m_sfumasx"></div>
+                                        <div id="m_sfumadx"></div>
                                         <div id="bracciale" style="width: 1119px;">
-                                            <div id="base_0" nrbase="0" class="tessera_base tessera_base_big_dark" style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="tooltip_incisione" style="">linea1<br>linea2</div>
+                                            <div id="base_0" nrbase="0" class="tessera_base tessera_base_big_dark">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_1" nrbase="1" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_1" nrbase="1" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_2" nrbase="2" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_2" nrbase="2" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_3" nrbase="3" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_3" nrbase="3" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_4" nrbase="4" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_4" nrbase="4" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_5" nrbase="5" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_5" nrbase="5" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_6" nrbase="6" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_6" nrbase="6" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_7" nrbase="7" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_7" nrbase="7" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_8" nrbase="8" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_8" nrbase="8" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_9" nrbase="9" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_9" nrbase="9" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_10" nrbase="10" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_10" nrbase="10" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_11" nrbase="11" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_11" nrbase="11" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_12" nrbase="12" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_12" nrbase="12" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_13" nrbase="13" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_13" nrbase="13" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_14" nrbase="14" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_14" nrbase="14" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_15" nrbase="15" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_15" nrbase="15" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_16" nrbase="16" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_16" nrbase="16" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_17" nrbase="17" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_17" nrbase="17" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
-                                            <div id="base_18" nrbase="18" class="tessera_base tessera_base_big_dark " style="height: 96px; width: 50px; margin-top: 0px;">
+                                            <div id="base_18" nrbase="18" class="tessera_base tessera_base_big_dark ">
                                                 <div class="stella_incisione"></div>
-                                                <div class="tesserabracciale" style="height: 134px; width: 110px; top: -13px; left: -30px;"></div>
-                                                <div class="handletessera drop ui-sortable-handle ui-droppable"></div>
+                                                <div class="tesserabracciale"></div>
+                                                <div class="handletessera drop"></div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div id="conf_suggerimento">
+                                        <div class="msg_close"></div>
+                                        <div class="msg_trascina"></div>
+                                        <div class="msg_text">Drag the link to the bracelet</div>
                                     </div>
                                 </div>
                                 <div id="conf_filtro">
@@ -170,12 +189,10 @@
                                             <div id="link_8033497304643" class="tessera" sku="8033497304643" imgsku="https://www.nomination.com/media/configurator/composable/big/8033497304643.png" cod_int="332501 01" nome=" Zodiac Link Aries with Birthstone" materiale="Sterling Silver" price="28.0000"
                                                 fprice="28" double="0" incisible="0" righe_inc="0" max_char="null" style="background-image: url(https://www.nomination.com/media/configurator/composable/big/8033497304643.png), url(https://www.nomination.com/skin/frontend/eurostep/core/img/tessera_base_drag_big.png);"></div>
                                         </div>
-                                        <div id="tessera_detail" style="left: 116px; top: 12px; display: none;">
-                                            <div id="imgdetail" class="tesseradrag drag ui-draggable ui-draggable-handle" sku="8033497027726" cod_int="032313 01" imgsku="https://www.nomination.com/media/configurator/composable/big/8033497027726.png" price="65.0000" nome=" Link white Cross with Stones"
-                                                materiale="Yellow Gold" fprice="65" double="0" incisible="0" righe_inc="0" max_char="null" style="margin-top: 0px; background-image: url(&quot;https://www.nomination.com/media/configurator/composable/big/8033497027726.png&quot;), url(&quot;https://www.nomination.com/skin/frontend/eurostep/core/img/tessera_base_drag_big.png&quot;);">
+                                        <div id="tessera_detail">
+                                            <div id="imgdetail" class="tesseradrag drag">
                                             </div>
-                                            <div id="textdetail"><span class="titolodetail"> Link white Cross with Stones</span><br>
-                                                <div class="pricedetail noprice">65.00 €</div>
+                                            <div id="textdetail">
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +204,9 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
     <script>
         var PrezzoBaseGratis = 35;
         var NumeroMinimoLink = 3;
@@ -205,7 +224,6 @@
         var TouchSwipeSrc = SKINURL + 'js/jquery.touchSwipe.min.js';
         var SimboloValuta = '€';
         var DragInCorso = false;
-        var ObjBracciale = {};
         var CostoTBase = 0;
         var BraccialeZoom;
         var SceltaBase1TC;
@@ -229,9 +247,258 @@
         var arr_tem = Array();
         var arr_spe = Array();
         var arr_link = Array();
+        const ObjBracciale = [{
+            "id ": 0,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 1,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 2,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 3,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 4,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 5,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 6,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 7,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 8,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 9,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 10,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 11,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 12,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 13,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " "
+        }, {
+            "id ": 14,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 15,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 16,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 17,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 18,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 19,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }, {
+            "id ": 20,
+            "cod ": " ",
+            "price ": 0,
+            "name ": " ",
+            "img ": " ",
+            "cod_int ": " ",
+            "dbl ": 0,
+            "incision ": 0,
+            "font ": " ",
+            "l1 ": " ",
+            "l2 ": " "
+        }];
     </script>
-    <script src="./dist/js/pages/home/home.js"></script>
-    <script src="./dist/js/common.js"></script>
+    <script src="./dist/bower_components/touchcarousel/jquery.touchcarousel-1.2.js "></script>
+    <script src="./dist/js/pages/home/home.js "></script>
+    <script src="./dist/js/common.js "></script>
 
 </body>
 

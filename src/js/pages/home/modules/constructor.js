@@ -1,10 +1,32 @@
 export default class Constructor {
     constructor() {
         this.isMobile = this.CheckIsMobile(); //initiate as false
+        // JavaScript Document
+        let IntervalloHover;
+        let BraccialeZoom;
+        let FiltroAperto = false;
+        let PrimoAccesso = true;
+        let LaccioBracciale = '';
+        let detail_visible = '';
+        let RicercaAttiva = false;
+        let SortStart = true;
+        let larghezza = jQuery(window).width();
+        let FiltriTC = null;
+        let DelayTouch = 0;
+        let paginaurl = '';
+        let ControllaMinimoNLink = false;
+        let OffsetToolTip = -20;
+        let ArrIncisioni = Array();
+        let ScrollBar = false;
+        // Controllo caricamenti
+        let mustBeBlocked = false;
         this.init();
     }
     init() {
         this.events();
+        // this.SettaPosizioniTessere("big");
+        this.RefreshSlideFiltri();
+        this.initDefault();
     }
     CheckIsMobile() {
         try {
@@ -18,12 +40,17 @@ export default class Constructor {
     events() {
         const self = this;
         const isMobile = self.isMobile;
-        let IntervalloHover;
+        var tes_top = -13;
+        var tes_left = -30;
+        var tes_top1 = -14;
+        var tes_left1 = -35;
+        var tes_top_o = -16;
+        var tes_left_o = -35;
         jQuery('.tessera').mouseenter(function() {
             if (!isMobile) {
                 //if (!DragInCorso) {
                 var elem = this;
-                IntervalloHover = setTimeout(function() {
+                self.IntervalloHover = setTimeout(function() {
                     self.VisualizzaHover(elem);
                 }, 100);
                 //}
@@ -33,8 +60,339 @@ export default class Constructor {
             if (!isMobile) {
                 if (!DragInCorso) {
                     jQuery('#tessera_detail').hide(0);
-                    clearTimeout(IntervalloHover);
+                    clearTimeout(self.IntervalloHover);
                 }
+            }
+        });
+        jQuery('#conf_zoom').on('click', function() {
+            var size = {
+                width: window.innerWidth || document.body.clientWidth,
+                height: window.innerHeight || document.body.clientHeight
+            }
+
+            var ulwidth = jQuery('#bracciale_zoom ul').width();
+            var xpos = 0 - ((ulwidth - size.width) / 2);
+            self.BraccialeZoom.setXPos(xpos);
+            //	BraccialeZoom.updateCarouselSize();
+            //	jQuery('#bracciale_zoom ul').css({left: '-300px'});
+
+            // self.CalcolaRiepilogo();
+            jQuery('#container_zoom').fadeIn(200);
+            jQuery('#container_bracciale').fadeOut(200);
+        });
+        jQuery('.tessera_base').on('click', function() {
+            var element = jQuery(this).find('.stella_incisione')
+            if (jQuery(element).is(':visible')) {
+                jQuery(this).find('.stella_incisione').fadeOut(200);
+                self.MostraToolipIncisione(element);
+            } else if (jQuery('#tooltip_incisione').is(':visible')) {
+                jQuery('#tooltip_incisione').fadeOut(200);
+                jQuery(this).find('.stella_incisione').fadeIn(200);
+            }
+        });
+
+        jQuery('.tessera_base').mouseenter(function() {
+            if (!isMobile) {
+
+
+
+                var link_width = '60px';
+                var tessera_width = '132px';
+                var width_next = '54px';
+                var width_tessera_next = '119px';
+                var width_prev = '54px';
+                var width_tessera_prev = '119px';
+                var link_mol = 1;
+                var next_mol = 1;
+                var prev_mol = 1;
+                var meno_left = 0;
+                var meno_top = 0;
+                if (jQuery(this).attr('double') == '1') {
+                    link_width = '120px';
+                    tessera_width = '264px';
+                    link_mol = 2;
+                    meno_left = -3;
+                    meno_top = -1;
+                }
+                if (jQuery(this).prev('.tessera_base').attr('double') == '1') {
+                    width_prev = '108px';
+                    width_tessera_prev = '238px';
+                    prev_mol = 2;
+                }
+                if (jQuery(this).next().attr('double') == '1') {
+                    width_next = '108px';
+                    width_tessera_next = '238px';
+                    next_mol = 2;
+                }
+                jQuery(this).stop().animate({
+                    height: '116px',
+                    width: link_width,
+                    marginTop: '-5px'
+                }, "fast");
+                jQuery(this).prev('.tessera_base').stop().animate({
+                    height: '104px',
+                    width: width_prev,
+                    marginTop: '-2px'
+                }, "fast");
+                jQuery(this).next().stop().animate({
+                    height: '104px',
+                    width: width_next,
+                    marginTop: '-2px'
+                }, "fast");
+
+                jQuery(this).find('.tesserabracciale').stop().animate({
+                    height: '160px',
+                    width: tessera_width,
+                    top: tes_top_o + meno_top,
+                    left: (tes_left_o * link_mol) + meno_left
+                }, 'fast');
+                jQuery(this).prev().find('.tesserabracciale').stop().animate({
+                    height: '145px',
+                    width: width_tessera_prev,
+                    top: tes_top1,
+                    left: tes_left1 * prev_mol
+                }, 'fast');
+                jQuery(this).next().find('.tesserabracciale').stop().animate({
+                    height: '145px',
+                    width: width_tessera_next,
+                    top: tes_top1,
+                    left: tes_left1 * next_mol
+                }, 'fast');
+                var j = jQuery(this).attr('nrbase');
+                jQuery('#dettaglio_over').hide();
+                if (ObjBracciale[j].cod != '') {
+                    self.MostraDettaglioOver(j);
+                } else {
+                    jQuery('#dettaglio_over').hide();
+                }
+            }
+        });
+        jQuery('.tessera_base').mouseleave(function() {
+            if (!isMobile) {
+                var link_width = '50px';
+                var tessera_width = '110px';
+                var width_next = '50px';
+                var width_tessera_next = '110px';
+                var width_prev = '50px';
+                var width_tessera_prev = '110px';
+                var link_mol = 1;
+                var next_mol = 1;
+                var prev_mol = 1;
+                if (jQuery(this).attr('double') == '1') {
+                    link_width = '100px';
+                    tessera_width = '220px';
+                    link_mol = 2;
+                }
+                if (jQuery(this).prev('.tessera_base').attr('double') == '1') {
+                    width_prev = '100px';
+                    width_tessera_prev = '220px';
+                    prev_mol = 2;
+                }
+                if (jQuery(this).next().attr('double') == '1') {
+                    width_next = '100px';
+                    width_tessera_next = '220px';
+                    next_mol = 2;
+                }
+                jQuery(this).stop().animate({
+                    height: '96px',
+                    width: link_width,
+                    marginTop: '0px'
+                }, "fast");
+                jQuery(this).prev('.tessera_base').stop().animate({
+                    height: '96px',
+                    width: width_prev,
+                    marginTop: '0px'
+                }, "fast");
+                jQuery(this).next().stop().animate({
+                    height: '96px',
+                    width: width_next,
+                    marginTop: '0px'
+                }, "fast");
+
+                jQuery(this).find('.tesserabracciale').stop().animate({
+                    height: '134px',
+                    width: tessera_width,
+                    top: tes_top,
+                    left: tes_left * link_mol
+                }, 'fast');
+                jQuery(this).next().find('.tesserabracciale').stop().animate({
+                    height: '134px',
+                    width: width_tessera_next,
+                    top: tes_top,
+                    left: tes_left * next_mol
+                }, 'fast');
+                jQuery(this).prev().find('.tesserabracciale').stop().animate({
+                    height: '134px',
+                    width: width_tessera_prev,
+                    top: tes_top,
+                    left: tes_left * prev_mol
+                }, 'fast');
+                jQuery('#dettaglio_over').hide();
+            }
+        });
+        jQuery(".drop").droppable({
+            accept: '.drag,.tessera',
+            tolerance: 'intersect',
+            activeClass: 'drag-active',
+            over: function(event, ui) {
+                var link_width = '60px';
+                var tessera_width = '132px';
+                var link_mol = 1;
+                if (jQuery(this).parent().attr('double') == '1') {
+                    link_width = '120px';
+                    tessera_width = '264px';
+                    link_mol = 2;
+                }
+                jQuery(this).parent().stop().animate({
+                    height: '116px',
+                    width: link_width,
+                    marginTop: '-5px'
+                }, "fast");
+                jQuery(this).parent().find('.tesserabracciale').stop().animate({
+                    height: '160px',
+                    width: tessera_width,
+                    top: tes_top_o,
+                    left: tes_left_o * link_mol
+                }, 'fast');
+            },
+            out: function(event, ui) {
+                var link_width = '50px';
+                var tessera_width = '110px';
+                var link_mol = 1;
+                if (jQuery(this).parent().attr('double') == '1') {
+                    link_width = '100px';
+                    tessera_width = '220px';
+                    link_mol = 2;
+                }
+                jQuery(this).parent().stop().animate({
+                    height: '96px',
+                    width: link_width,
+                    marginTop: '0px'
+                }, "fast");
+                jQuery(this).parent().find('.tesserabracciale').stop().animate({
+                    height: '134px',
+                    width: tessera_width,
+                    top: tes_top,
+                    left: tes_left * link_mol
+                }, 'fast');
+            },
+            drop: function(event, ui) {
+                var sname = jQuery(ui.draggable).attr('nome');
+                var imgsku = jQuery(ui.draggable).attr('imgsku');
+                var sku = jQuery(ui.draggable).attr('sku');
+                var scod_int = jQuery(ui.draggable).attr('cod_int');
+                var fprice = jQuery(ui.draggable).attr('fprice');
+                var double = jQuery(ui.draggable).attr('double');
+                var incisible = jQuery(ui.draggable).attr('incisible');
+                var righe_inc = jQuery(ui.draggable).attr('righe_inc');
+                var max_char = jQuery(ui.draggable).attr('max_char');
+                var sottraibase = false;
+                var link_width = '50px';
+                var tessera_width = '110px';
+                var j = parseInt(jQuery(this).parent().attr('nrbase'));
+                var mol_left = 1;
+                if ((double == 0) || (j < NrLink - 1) || (ObjBracciale[j].dbl == 1)) {
+                    switch ('big') {
+                        case 'classic':
+                            if (double == 1) {
+                                if (jQuery(this).parent().attr('double') == '1') {
+                                    RimuoviDouble(j, this, true);
+                                }
+                                jQuery(this).parent().addClass('tessera_base_link_double');
+                                jQuery(this).parent().attr('double', '1');
+                                link_width = '100px';
+                                tessera_width = '220px';
+                                mol_left = 2;
+                            } else {
+                                if (jQuery(this).parent().attr('double') == '1') {
+                                    RimuoviDouble(j, this, true);
+                                }
+                                jQuery(this).parent().addClass('tessera_base_link');
+                            }
+                            sottraibase = true;
+                            break;
+                        case 'big':
+                            jQuery(this).parent().addClass('tessera_base_link_big');
+                            sottraibase = true;
+                            break;
+                        case 'mbbshort':
+                        case 'mbblong':
+                            jQuery(this).parent().addClass('tessera_base_mbb_drop');
+                            break;
+                        case 'seimia':
+                            jQuery(this).parent().addClass('tessera_base_seimia_drop');
+                            break;
+                        default:
+                            imgsku = imgsku.replace(sku, 'f_' + sku);
+                            jQuery(this).parent().addClass('tessera_base_cubiamo_drop');
+                            break;
+                    }
+
+                    jQuery(this).parent().find(".tesserabracciale").css('background-image', 'url(' + imgsku + ')');
+                    jQuery(this).parent().stop().animate({
+                        height: '96px',
+                        width: link_width,
+                        marginTop: '0px'
+                    }, 'fast');
+                    jQuery(this).parent().find('.tesserabracciale').stop().animate({
+                        height: '134px',
+                        width: tessera_width,
+                        top: tes_top,
+                        left: tes_left * mol_left
+                    }, "fast");
+                    jQuery(this).parent().prev().css('z-index', '');
+                    jQuery(this).parent().next().css('z-index', '');
+                    jQuery(this).parent().css('z-index', '1');
+                    jQuery('#tessera_detail').hide(0);
+
+                    if (double == 1) {
+                        objdouble = {
+                            id: j,
+                            cod: sku,
+                            price: fprice,
+                            name: sname,
+                            img: imgsku,
+                            cod_int: scod_int,
+                            dbl: double
+                        };
+                        self.AggiungiDouble(j, objdouble, this, sottraibase);
+                    } else {
+                        if ((sottraibase) && (ObjBracciale[j].cod == '')) {
+                            NrLinkBase--;
+                        }
+                        ObjBracciale[j] = {
+                            id: j,
+                            cod: sku,
+                            price: fprice,
+                            name: sname,
+                            img: imgsku,
+                            cod_int: scod_int,
+                            dbl: double
+                        };
+                    }
+                    self.AggiornaObjBracciale();
+                    // self.CalcolaRiepilogo();
+
+                    jQuery('#div_hover').fadeOut(200);
+                    if (self.ControllaMinimoNLink) {
+                        if (ContaTessere() >= NumeroMinimoLink) {
+                            jQuery('#acquista_bracciale').removeClass('disable');
+                            jQuery('#m_acquista_fixed').removeClass('disable');
+                            jQuery('#m_riepilogo_bag').removeClass('disable');
+                            jQuery('#m_btn_acquista').removeClass('disable');
+                        }
+                    } else {
+                        jQuery('#acquista_bracciale').removeClass('disable');
+                        jQuery('#m_acquista_fixed').removeClass('disable');
+                        jQuery('#m_riepilogo_bag').removeClass('disable');
+                        jQuery('#m_btn_acquista').removeClass('disable');
+                    }
+                    if (incisible == 1) {
+                        MostraFormIncisione(j, righe_inc, max_char);
+                    }
+                }
+                DragInCorso = false;
+                return false;
             }
         });
     }
@@ -112,5 +470,350 @@ export default class Constructor {
 
     esc_quot(text) {
         return text.replaceAll('"', '&quot;');
+    }
+
+    RefreshSlideFiltri() {
+        const self = this;
+        var size = {
+            width: window.innerWidth || document.body.clientWidth,
+            height: window.innerHeight || document.body.clientHeight
+        }
+
+        var largh = 0;
+        var nr_li = 0;
+        jQuery('#filtri_attivi .touchcarousel ul li').each(function(index, element) {
+            largh += jQuery(this).width();
+            nr_li++;
+        });
+
+        if (largh > size.width) {
+            self.FiltriTC = jQuery('#filtri_attivi .touchcarousel').touchCarousel({
+                scrollbar: false,
+                pagingNavControls: false,
+                directionNav: false,
+                scrollToLast: true
+            }).data('touchCarousel');
+            jQuery('#filtri_attivi .touchcarousel ul').width(largh + 10);
+            FiltriTC.goTo(nr_li); //li_vuoto;
+        } else {
+            self.FiltriTC = null;
+        }
+    }
+    initDefault() {
+        const self = this;
+        jQuery('#bracciale').sortable({
+            handle: '.handletessera',
+            opacity: 0.6,
+            appendTo: 'body',
+            helper: 'original',
+            delay: self.DelayTouch,
+            disabled: false, //(!isMobile),
+            activate: function(event, ui) {
+
+            },
+            start: function(event, ui) {
+                self.SortStart = true;
+                jQuery(ui.item).find('.stella_incisione').fadeOut(200);
+                if (jQuery('#tooltip_incisione').is(":visible")) {
+                    jQuery('#tooltip_incisione').fadeOut(200);
+                }
+            },
+            stop: function(event, ui) {
+                self.SortStart = false;
+                var j = jQuery(ui.item).attr('nrbase');
+                if (ObjBracciale[j].incision == 1) {
+                    jQuery('#base_' + j).find('.stella_incisione').fadeIn(200);
+                }
+                jQuery(ui.item).prev().css('z-index', '');
+                jQuery(ui.item).next().css('z-index', '');
+                jQuery(ui.item).css('z-index', '1');
+                self.AggiornaObjBracciale();
+            },
+            update: function(event, ui) {
+                ui.item.unbind("click");
+                ui.item.one("click", function(event) {
+                    console.log("one-time-click");
+                    event.stopImmediatePropagation();
+                    jQuery(this).on('click', function() {
+                        var element = jQuery(this).find('.stella_incisione');
+                        if (jQuery(element).is(':visible')) {
+                            jQuery(this).find('.stella_incisione').fadeOut(200);
+                            self.MostraToolipIncisione(element);
+                        } else if (jQuery('#tooltip_incisione').is(':visible')) {
+                            jQuery('#tooltip_incisione').fadeOut(200);
+                            jQuery(this).find('.stella_incisione').fadeIn(200);
+                        }
+                    });
+                });
+            },
+            /*
+             update: function( event, ui ) {
+             if (isMobile) {
+             jQuery("#bracciale").sortable('disable');
+             }
+             },
+             */
+            deactivate: function(event, ui) {
+                var diff = Math.abs(ui.originalPosition.top - ui.position.top);
+                if (diff > 60) {
+                    RimuoviTessera(jQuery(ui.item), false);
+                }
+            }
+        });
+        var size = {
+            width: window.innerWidth || document.body.clientWidth,
+            height: window.innerHeight || document.body.clientHeight
+        };
+
+        jQuery('#bracciale_zoom').width(size.width);
+        self.BraccialeZoom = jQuery('#bracciale_zoom').touchCarousel({
+            itemFallbackWidth: 100,
+            scrollbar: false,
+            dragUsingMouse: false
+        }).data("touchCarousel");
+        self.AggiornaTriggerTessere();
+    }
+    MostraToolipIncisione(element) {
+        const self = this;
+        if (jQuery('#tooltip_incisione').is(":visible")) {
+            var jstella = jQuery('#tooltip_incisione').attr('nrbase');
+            jQuery('#base_' + jstella).find('.stella_incisione').fadeIn(200);
+        }
+        var j = jQuery(element).parent().attr('nrbase');
+        var position = jQuery(element).parent().position();
+        var wparent = jQuery(element).parent().width();
+        var left = position.left + ((wparent - jQuery('#tooltip_incisione').width()) / 2) + self.OffsetToolTip;
+        jQuery('#tooltip_incisione').attr('nrbase', j);
+        jQuery('#tooltip_incisione').css("font-family", "'" + ObjBracciale[j].font + "', sans-serif");
+        jQuery('#tooltip_incisione').css('left', left);
+        var strhtml = '<div class="textcontainer">';
+        if (ObjBracciale[j].l2 == '') {
+            strhtml += '<div class="inner">' + ObjBracciale[j].l1 + '</div>';
+        } else {
+            strhtml += '<div class="inner">' + ObjBracciale[j].l1 + '<br>' + ObjBracciale[j].l2 + '</div>';
+        }
+        strhtml += '</div>';
+        jQuery('#tooltip_incisione').html(strhtml);
+        jQuery('#tooltip_incisione').fadeIn(200);
+        jQuery(this).fadeOut(200);
+    }
+
+    AggiornaTriggerTessere() {
+        const self = this;
+        const isMobile = self.isMobile;
+        if (isMobile) {
+            jQuery(".tessera").draggable({
+                containment: 'document',
+                revert: 'invalid',
+                helper: 'clone',
+                handle: 'div.drag',
+                zIndex: 100,
+                opacity: 0.6,
+                delay: self.DelayTouch,
+                appendTo: 'body',
+                start: function(event, ui) {
+                    self.ChiudiBarraRiepilogo();
+                    DragInCorso = true;
+                },
+                stop: function() {
+                    DragInCorso = false;
+                }
+            });
+
+
+            jQuery('.drag').swipe({
+                swipeUp: function(event, direction, distance, duration, fingerCount, fingerData) {
+                    if (duration < self.DelayTouch) {
+                        jQuery('html, body').stop().animate({
+                            scrollTop: jQuery(window).scrollTop() + (2.5 * distance)
+                        }, 500, 'swing');
+                    }
+                },
+                swipeDown: function(event, direction, distance, duration, fingerCount, fingerData) {
+                    if (duration < self.DelayTouch) {
+                        jQuery('html, body').stop().animate({
+                            scrollTop: jQuery(window).scrollTop() - (2.5 * distance)
+                        }, 500, 'swing');
+                    }
+                },
+                allowPageScroll: "auto"
+            });
+
+        } else {
+            jQuery(".drag").draggable({
+                containment: 'document',
+                revert: 'invalid',
+                helper: 'clone',
+                zIndex: 100,
+                opacity: 0.6,
+                appendTo: 'body',
+                start: function(event, ui) {
+                    self.ChiudiBarraRiepilogo();
+                    DragInCorso = true;
+                },
+                stop: function() {
+                    DragInCorso = false;
+                    jQuery('#tessera_detail').hide(0);
+                    jQuery('#conf_suggerimento').fadeOut(200);
+                }
+            });
+        }
+
+        jQuery('.tessera').mouseenter(function() {
+            if (!isMobile) {
+                if (!DragInCorso) {
+                    var elem = this;
+                    self.IntervalloHover = setTimeout(function() {
+                        self.VisualizzaHover(elem);
+                    }, 100);
+                }
+            }
+        });
+
+        jQuery('#tessera_detail').mouseleave(function() {
+            if (!isMobile) {
+                if (!DragInCorso) {
+                    jQuery('#tessera_detail').hide(0);
+                    clearTimeout(self.IntervalloHover);
+                }
+            }
+        });
+
+        jQuery('.stella_incisione').on('click', function() {
+            MostraTooltipIncisione(this);
+        });
+
+        jQuery('#tooltip_incisione').on('click', function() {
+            var j = jQuery(this).attr('nrbase');
+            jQuery(this).fadeOut(200);
+            jQuery('#base_' + j).find('.stella_incisione').fadeIn(200);
+        });
+        /*
+	 jQuery('#div_hover').mouseenter(function () {
+	 if (!DragInCorso) {
+	 if (jQuery('#tessera_detail:hover').length == 0) {
+	 jQuery('#div_hover').fadeOut(200);
+	 clearTimeout(self.IntervalloHover);
+	 }
+	 }
+	 });
+	 */
+    }
+    SettaPosizioniTessere(TipoBracciale) {
+        switch (TipoBracciale) {
+            case 'classic':
+                tes_top = -23;
+                tes_left = -30;
+                tes_top1 = -25;
+                tes_left1 = -33;
+                tes_top_o = -26;
+                tes_left_o = -35;
+                break;
+            case 'big':
+                tes_top = -13;
+                tes_left = -30;
+                tes_top1 = -14;
+                tes_left1 = -35;
+                tes_top_o = -16;
+                tes_left_o = -35;
+                break;
+            case 'mbbshort':
+            case 'mbblong':
+                tes_top = -24;
+                tes_left = -31;
+                tes_top1 = -26;
+                tes_left1 = -33;
+                tes_top_o = -28;
+                tes_left_o = -37;
+                break;
+            case 'seimia':
+                tes_top = 6;
+                tes_left = -31;
+                tes_top1 = 8;
+                tes_left1 = -33;
+                tes_top_o = 10;
+                tes_left_o = -37;
+                break;
+            default:
+                tes_top = -24;
+                tes_left = -31;
+                tes_top1 = -26;
+                tes_left1 = -33;
+                tes_top_o = -28;
+                tes_left_o = -37;
+                break;
+        }
+    }
+    ChiudiBarraRiepilogo() {
+        const self = this;
+        if (self.ScrollBar) {
+            jQuery('#riepilogo_tessere').perfectScrollbar('destroy');
+        }
+        jQuery('#riepilogo_tessere').hide(200);
+        //jQuery("#rie_tot").hide(0);
+        jQuery('#riepilogo_bracciale').css('background-image', 'url(' + SKINURL + '/img/bgriepilogo.png)');
+    }
+    MostraDettaglioOver(j) {
+        const self = this;
+        var pngtessera = 'tessera_base_drag';
+        var addclass = '';
+        switch ('big') {
+            case 'classic':
+                pngtessera = 'tessera_base_drag';
+                if (ObjBracciale[j].dbl == 1) {
+                    pngtessera = 'tessera_base_drag_double';
+                }
+                break;
+            case 'big':
+                pngtessera = 'tessera_base_drag_big';
+                break;
+
+            case 'mbbshort':
+            case 'mbblong':
+                jQuery('#dettaglio_over .rie_tes_img').addClass('nopendenti');
+                pngtessera = 'tessera_base_drag_mbb';
+                break;
+
+            case 'seimia':
+                pngtessera = 'tessera_base_drag_seimia';
+                break;
+
+            default:
+                jQuery('#dettaglio_over .rie_tes_img').addClass('nopendenti');
+                pngtessera = 'tessera_base_drag_cubiamo';
+                break;
+        }
+
+        var bgimage = 'url(' + ObjBracciale[j].img + '), url(' + SKINURL + 'img/' + pngtessera + '.png)';
+        jQuery('#dettaglio_over .rie_tes_img').css('background-image', bgimage);
+        var strhtml = ObjBracciale[j].name + '<br>'
+        strhtml += self.GetPriceHtml(ObjBracciale[j].price, ObjBracciale[j].price, 'pricedetail');
+        jQuery('#dettaglio_over .testo').html(strhtml);
+        jQuery('#dettaglio_over').show();
+    }
+    AggiornaObjBracciale() {
+        jQuery('#bracciale .tessera_base').each(function(index) {
+            var j = parseInt(jQuery(this).attr('nrbase'));
+            ObjBracciale[j].id = index;
+        });
+    }
+    AggiungiDouble(j, objdouble, element, sottraibase) {
+        if ((sottraibase) && (ObjBracciale[j].cod == '')) {
+            NrLinkBase--;
+        }
+        ObjBracciale[j] = objdouble;
+        var idthis = jQuery(element).parent().attr('nrbase');
+        var idnext = jQuery(element).parent().next().attr('nrbase');
+        if (jQuery('#base_' + idnext).attr('double') == '1') {
+            RimuoviDouble(idnext, null, true);
+        }
+        jQuery(element).parent().next().hide();
+        jQuery('#base_' + idnext).appendTo('#base_' + idthis);
+        jQuery(element).parent().find('.handletessera').css('width', '92px');
+        if ((sottraibase) && (ObjBracciale[idnext].cod == '')) {
+            NrLinkBase--;
+        }
+        ObjBracciale[idnext].id = j;
+        ObjBracciale[idnext].cod = 'double';
     }
 }
