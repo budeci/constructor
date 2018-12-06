@@ -93,9 +93,6 @@ export default class Constructor {
 
         jQuery('.tessera_base').mouseenter(function() {
             if (!isMobile) {
-
-
-
                 var link_width = '60px';
                 var tessera_width = '132px';
                 var width_next = '54px';
