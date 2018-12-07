@@ -1,3 +1,16 @@
+body {
+  .tesseradrag {
+    display: inline-block;
+    width: 128px;
+    height: 155px;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: top center,top center;
+    background-size: contain,contain;
+    cursor: pointer;
+  }
+}
+
 #step3 {
   background-color: #FFFFFF;
   min-height: 600px;
@@ -6,6 +19,7 @@
     position: relative;
     height: 340px;
     transform: translateZ(0);
+    z-index: 99;
     #container_bracciale {
       position: absolute;
       display: block;
@@ -26,6 +40,9 @@
         margin: 0 auto;
         .tessera_base_big_dark {
           background-image: url('../img/bracciale/tessera_base_big_dark.png');
+          &.tessera_base_link_big {
+            background-image: url('../img/bracciale/tessera_base_link_big.png');
+          }
           .stella_incisione {
             position: relative;
             display: none;

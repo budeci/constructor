@@ -302,7 +302,7 @@ export default class Constructor {
                                 mol_left = 2;
                             } else {
                                 if (jQuery(this).parent().attr('double') == '1') {
-                                    RimuoviDouble(j, this, true);
+                                    self.RimuoviDouble(j, this, true);
                                 }
                                 jQuery(this).parent().addClass('tessera_base_link');
                             }
@@ -372,7 +372,7 @@ export default class Constructor {
 
                     jQuery('#div_hover').fadeOut(200);
                     if (self.ControllaMinimoNLink) {
-                        if (ContaTessere() >= NumeroMinimoLink) {
+                        if (self.ContaTessere() >= NumeroMinimoLink) {
                             jQuery('#acquista_bracciale').removeClass('disable');
                             jQuery('#m_acquista_fixed').removeClass('disable');
                             jQuery('#m_riepilogo_bag').removeClass('disable');
@@ -553,7 +553,7 @@ export default class Constructor {
             deactivate: function(event, ui) {
                 var diff = Math.abs(ui.originalPosition.top - ui.position.top);
                 if (diff > 60) {
-                    RimuoviTessera(jQuery(ui.item), false);
+                    self.RimuoviTessera(jQuery(ui.item), false);
                 }
             }
         });
@@ -637,11 +637,14 @@ export default class Constructor {
             });
 
         } else {
+
             jQuery(".drag").draggable({
                 containment: 'document',
                 revert: 'invalid',
+                // handle: 'div.drag',
                 helper: 'clone',
-                zIndex: 100,
+                scroll: false,
+                zIndex: '100',
                 opacity: 0.6,
                 appendTo: 'body',
                 start: function(event, ui) {
@@ -812,5 +815,382 @@ export default class Constructor {
         }
         ObjBracciale[idnext].id = j;
         ObjBracciale[idnext].cod = 'double';
+    }
+    RimuoviDouble(j, element, sottraibase) {
+        var idthis;
+        var idnext;
+        if (element != null) {
+            idthis = jQuery(element).parent().attr('nrbase');
+            idnext = jQuery(element).parent().find('.tessera_base').attr('nrbase');
+        } else {
+            idthis = j;
+            idnext = jQuery('#base_' + j).find('.tessera_base').attr('nrbase');
+            jQuery('#base_' + idthis).css('width', '50px');
+        }
+        jQuery('#base_' + idthis).attr('double', '0');
+        jQuery('#base_' + idthis).removeClass('tessera_base_link_double');
+        jQuery('#base_' + idnext).insertAfter('#base_' + idthis);
+        jQuery('#base_' + idnext).find('.tesserabracciale').css('background-image', 'none');
+        jQuery('#base_' + idnext).find('.stella_incisione').hide();
+        jQuery('#base_' + idthis).find('.stella_incisione').hide();
+        jQuery('#base_' + idnext).show();
+        jQuery('#base_' + idthis).parent().find('.handletessera').css('width', '46px');
+        if (sottraibase) {
+            NrLinkBase++;
+        }
+
+        ObjBracciale[idthis] = {
+            id: j,
+            cod: '',
+            price: 0,
+            name: '',
+            img: '',
+            cod_int: '',
+            dbl: 0
+        };
+        ObjBracciale[idnext] = {
+            id: j,
+            cod: '',
+            price: 0,
+            name: '',
+            img: '',
+            cod_int: '',
+            dbl: 0
+        };
+    }
+    RimuoviTessera(id, silent) {
+        const self = this;
+        var j = 0;
+        var TipoBracciale = 'big';
+        if (jQuery(id).hasClass('x_tessera')) {
+            j = jQuery(id).attr('nrtes');
+            var idpar = jQuery(this).parent();
+            jQuery(idpar).remove();
+        } else {
+            j = jQuery(id).attr('nrbase');
+        }
+
+        if (jQuery('#base_' + j).attr('double') == '1') {
+            self.RimuoviDouble(j, null, true);
+        }
+
+        ObjBracciale[j] = {
+            id: j,
+            cod: '',
+            price: 0,
+            name: '',
+            img: '',
+            cod_int: ''
+        };
+        if ((TipoBracciale == 'classic') || (TipoBracciale == 'big')) {
+            NrLinkBase++;
+        }
+
+        jQuery('#base_' + j).find(' .tesserabracciale').css('background-image', 'none');
+        switch (TipoBracciale) {
+            case 'classic':
+                jQuery('#base_' + j).removeClass('tessera_base_link');
+                break;
+            case 'big':
+                jQuery('#base_' + j).removeClass('tessera_base_link_big');
+                break;
+            case 'mbbshort':
+            case 'mbblong':
+                jQuery('#base_' + j).removeClass('tessera_base_mbb_drop');
+                break;
+            case 'seimia':
+                jQuery('#base_' + j).removeClass('tessera_base_seimia_drop');
+                break;
+            default:
+                jQuery('#base_' + j).removeClass('tessera_base_cubiamo_drop');
+                break;
+        }
+
+        if (!silent) self.CalcolaRiepilogo(true);
+        if ((self.ContaTessere() == 0) && (PulsanteAcquista)) {
+            jQuery('#acquista_bracciale').addClass('disable');
+            jQuery('#m_btn_acquista').addClass('disable');
+            jQuery('#m_acquista_fixed').addClass('disable');
+            jQuery('#m_riepilogo_bag').addClass('disable');
+        } else if ((self.ControllaMinimoNLink) && (self.ContaTessere() < NumeroMinimoLink) && (PulsanteAcquista)) {
+            jQuery('#acquista_bracciale').addClass('disable');
+            jQuery('#m_btn_acquista').addClass('disable');
+            jQuery('#m_acquista_fixed').addClass('disable');
+            jQuery('#m_riepilogo_bag').addClass('disable');
+        }
+    }
+    RimuoviDouble(j, element, sottraibase) {
+        var idthis;
+        var idnext;
+        if (element != null) {
+            idthis = jQuery(element).parent().attr('nrbase');
+            idnext = jQuery(element).parent().find('.tessera_base').attr('nrbase');
+        } else {
+            idthis = j;
+            idnext = jQuery('#base_' + j).find('.tessera_base').attr('nrbase');
+            jQuery('#base_' + idthis).css('width', '50px');
+        }
+        jQuery('#base_' + idthis).attr('double', '0');
+        jQuery('#base_' + idthis).removeClass('tessera_base_link_double');
+        jQuery('#base_' + idnext).insertAfter('#base_' + idthis);
+        jQuery('#base_' + idnext).find('.tesserabracciale').css('background-image', 'none');
+        jQuery('#base_' + idnext).find('.stella_incisione').hide();
+        jQuery('#base_' + idthis).find('.stella_incisione').hide();
+        jQuery('#base_' + idnext).show();
+        jQuery('#base_' + idthis).parent().find('.handletessera').css('width', '46px');
+        if (sottraibase) {
+            NrLinkBase++;
+        }
+
+        ObjBracciale[idthis] = {
+            id: j,
+            cod: '',
+            price: 0,
+            name: '',
+            img: '',
+            cod_int: '',
+            dbl: 0
+        };
+        ObjBracciale[idnext] = {
+            id: j,
+            cod: '',
+            price: 0,
+            name: '',
+            img: '',
+            cod_int: '',
+            dbl: 0
+        };
+    }
+    CalcolaRiepilogo() {
+        const self = this;
+        var strhtml = '';
+        var TipoBracciale = 'big';
+        jQuery('#riepilogo_tessere').html('<div class="div_riepilogo">');
+        jQuery('#m_elenco_tessere').html('');
+        var TotLink = 0;
+        var nr = 0;
+        var z = 0;
+
+        var strlink = str_links;
+        var pngtessera = 'tessera_base_drag';
+        switch (TipoBracciale) {
+            case 'classic':
+                pngtessera = 'tessera_base_drag';
+                break;
+            case 'big':
+                pngtessera = 'tessera_base_drag_big';
+                break;
+
+            case 'mbbshort':
+            case 'mbblong':
+                strlink = str_charms;
+                str_basebracciale = str_bracciale;
+                pngtessera = 'tessera_base_drag_mbb';
+                break;
+
+            case 'seimia':
+                str_base = str_necklace;
+                strlink = str_pendente;
+                pngtessera = 'tessera_base_drag_seimia';
+                break;
+
+            default:
+                strlink = str_cubi;
+                str_basebracciale = str_bracciale;
+                pngtessera = 'tessera_base_drag_cubiamo';
+                break;
+        }
+
+        var nrbracciale = 0;
+
+        if ((TipoBracciale != 'classic') && (TipoBracciale != 'big')) {
+            var bgimage = 'background-image: ' + bgurl_scelto.replace(/"/g, '') + '; background-position: top center ';
+            strhtml = '<div class="rie_tes">';
+            strhtml += '<div class="rie_tes_img" style=" ' + bgimage + '"></div>';
+            strhtml += TextBracciale + '<br><span class="text13gray">' + str_codice + MaterialeBracciale;
+            if (PulsanteAcquista) {
+                strhtml += '<br>1 x ' + SimboloValuta + ' ' + self.DisplayCurrency(CostoTBase);
+            }
+            strhtml += '</span>';
+            strhtml += '<div>';
+            jQuery('#riepilogo_tessere').append(strhtml);
+            jQuery('#m_elenco_tessere').append(strhtml);
+            nrbracciale = 1;
+        }
+
+        jQuery('#bracciale .tessera_base').each(function(index) {
+            var j = parseInt(jQuery(this).attr('nrbase'));
+            jQuery('#basezoom_' + z).show();
+            if ((ObjBracciale[j].cod != '') && (ObjBracciale[j].cod != 'double')) {
+                var bgtessera = pngtessera;
+                if (ObjBracciale[j].dbl == 1) {
+                    bgtessera = 'tessera_base_drag_double';
+                }
+                var bgimage = 'background-image: url(' + ObjBracciale[j].img + '), url(' + SKINURL + 'img/' + bgtessera + '.png)';
+                strhtml = '<div class="rie_tes">';
+                strhtml += '<div class="rie_tes_img" style=" ' + bgimage + '"></div>';
+                strhtml += ObjBracciale[j].name + '<br><span class="text13gray">' + str_codice + ObjBracciale[j].cod_int + '<br>' + str_posizione + (index + 1);
+                if (PulsanteAcquista) {
+                    strhtml += '<br>1 x ' + SimboloValuta + ' ' + self.DisplayCurrency(ObjBracciale[j].price);
+                }
+                strhtml += '</span>';
+                strhtml += '<div class="x_tessera" nrtes="' + j + '"></div><div>';
+                jQuery('#riepilogo_tessere').append(strhtml);
+                jQuery('#m_elenco_tessere').append(strhtml);
+
+
+                switch (TipoBracciale) {
+                    case 'classic':
+                        if (ObjBracciale[j].dbl == 1) {
+                            jQuery('#basezoom_' + z).addClass('tessera_base_link_double');
+                            jQuery('#basezoom_' + z).addClass('tessera_basezoom_double');
+                            jQuery('#basezoom_' + z + ' .tesserabraccialezoom').css('left', '-14px');
+                        } else {
+                            jQuery('#basezoom_' + z).addClass('tessera_base_link');
+                            jQuery('#basezoom_' + z).removeClass('tessera_basezoom_double');
+                        }
+                        jQuery('#basezoom_' + z + ' .tesserabraccialezoom').css({
+                            'background-image': 'url(' + ObjBracciale[j].img + ')',
+                            'z-index': '9'
+                        });
+                        break;
+
+                    case 'big':
+                        jQuery('#basezoom_' + z).addClass('tessera_base_link_big');
+                        jQuery('#basezoom_' + z + ' .tesserabraccialezoom_big').css({
+                            'background-image': 'url(' + ObjBracciale[j].img + ')',
+                            'z-index': '9'
+                        });
+                        break;
+
+                    case 'mbbshort':
+                    case 'mbblong':
+                        jQuery('#basezoom_' + z).addClass('tessera_base_mbb_drop');
+                        jQuery('#basezoom_' + z + ' .tesserabraccialezoom_mbb').css({
+                            'background-image': 'url(' + ObjBracciale[j].img + ')',
+                            'z-index': '9'
+                        });
+                        break;
+                    case 'seimia':
+                        jQuery('#basezoom_' + z).addClass('tessera_base_seimia_drop');
+                        jQuery('#basezoom_' + z + ' .tesserabraccialezoom_seimia').css({
+                            'background-image': 'url(' + ObjBracciale[j].img + ')',
+                            'z-index': '9'
+                        });
+                        break;
+                    default:
+                        var imgsku = ObjBracciale[j].img;
+                        var sku = ObjBracciale[j].cod;
+                        //imgsku = imgsku.replace(sku, 'f_' + sku);
+                        jQuery('#basezoom_' + z).addClass('tessera_base_cubiamo_drop');
+                        jQuery('#basezoom_' + z + ' .tesserabraccialezoom_cubiamo').css({
+                            'background-image': 'url(' + imgsku + ')',
+                            'z-index': '9'
+                        });
+                        break;
+                }
+                TotLink += parseFloat(ObjBracciale[j].price);
+                nr++;
+            } else {
+                if (ObjBracciale[j].cod != 'double') {
+                    switch (TipoBracciale) {
+                        case 'classic':
+                            jQuery('#basezoom_' + z).removeClass('tessera_base_link');
+                            jQuery('#basezoom_' + z).removeClass('tessera_base_link_double');
+                            jQuery('#basezoom_' + z).removeClass('tessera_basezoom_double');
+                            jQuery('#basezoom_' + z + ' .tesserabraccialezoom').css('background-image', 'none');
+                            break;
+
+                        case 'big':
+                            jQuery('#basezoom_' + z).removeClass('tessera_base_link_big');
+                            jQuery('#basezoom_' + z + ' .tesserabraccialezoom_big').css('background-image', 'none');
+                            break;
+
+                        case 'mbbshort':
+                        case 'mbblong':
+                            jQuery('#basezoom_' + z).removeClass('tessera_base_mbb_drop');
+                            jQuery('#basezoom_' + z + ' .tesserabraccialezoom_mbb').css('background-image', 'none');
+                            break;
+                        case 'seimia':
+                            jQuery('#basezoom_' + z).removeClass('tessera_base_seimia_drop');
+                            jQuery('#basezoom_' + z + ' .tesserabraccialezoom_seimia').css('background-image', 'none');
+                            break;
+                        default:
+                            jQuery('#basezoom_' + z).removeClass('tessera_base_cubiamo_drop');
+                            jQuery('#basezoom_' + z + ' .tesserabraccialezoom_cubiamo').css('background-image', 'none');
+                            break;
+                    }
+                } else {
+                    jQuery('#basezoom_' + z).hide();
+                }
+            }
+            z++;
+        });
+        jQuery('#riepilogo_tessere').append('</div>');
+
+        jQuery('#riepilogo_tessere .div_riepilogo .rie_tes:last-child').css('border-bottom', '0');
+        var totale = (NrLinkBase * CostoTBase) + TotLink;
+        var totbase = (NrLinkBase * CostoTBase);
+        if ((self.ControllaMinimoNLink) && (self.ContaTessere() >= NumeroMinimoLink)) {
+            totale = TotLink;
+            totbase = 0;
+        }
+
+        if ((PromoBaseGratis) && (TotLink >= PrezzoBaseGratis)) {
+            totale = TotLink;
+            totbase = 0;
+        }
+
+        var testo = str_base + ' ' + SimboloValuta + ' ' + self.DisplayCurrency(totbase) + ' + ' + nr + ' ' + strlink + ' ' + SimboloValuta + ' ' + self.DisplayCurrency(TotLink) + ' = <b>' + SimboloValuta + ' ' + self.DisplayCurrency(totale) + '</b>'
+        if (!PulsanteAcquista) {
+            testo = str_basebracciale + ' + ' + nr + ' ' + strlink + ' ';
+        }
+        jQuery("#rie_tot").html(testo);
+        testo = '<b>' + SimboloValuta + ' ' + self.DisplayCurrency(totale) + '</b>';
+        if (!PulsanteAcquista) {
+            testo = '<b>' + nr + ' ' + strlink + '</b>';
+        }
+
+        jQuery("#m_rie_tot").html(testo);
+        jQuery("#m_price_sub").html(SimboloValuta + ' ' + self.DisplayCurrency(totale));
+
+        jQuery('.x_tessera').on('click', function() {
+            var id = jQuery(this);
+            RimuoviTessera(id, false);
+        });
+
+        var altezza = (nr + nrbracciale) * 92;
+        var ScrollBar = false;
+        if (altezza > 276) {
+            altezza = 276;
+            ScrollBar = true;
+        }
+        jQuery('#riepilogo_tessere').height(altezza);
+        var size = {
+            width: window.innerWidth || document.body.clientWidth,
+            height: window.innerHeight || document.body.clientHeight
+        }
+
+        var altezzadisp = size.height - 65;
+        //jQuery('#m_riepilogo_tessere').height(altezzadisp);
+        altezza = altezzadisp - 140;
+        jQuery('#m_elenco_tessere').height(altezza);
+        altezza = (nr + nrbracciale) * 102;
+        var ScrollBarMobile = false;
+        if (altezza > (altezzadisp - 140)) {
+            jQuery('#m_elenco_tessere').css('max-height', altezza + 'px');
+            ScrollBarMobile = true;
+        }
+    }
+    ContaTessere() {
+        var nrtessere = 0;
+        for (var j = 0; j < NrLink; j++) {
+            if (typeof ObjBracciale[j] !== 'undefined') {
+                if ((ObjBracciale[j].cod != '') && (ObjBracciale[j].cod != 'double')) {
+                    nrtessere++;
+                }
+            }
+        }
+        return nrtessere;
     }
 }

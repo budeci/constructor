@@ -33,10 +33,10 @@
                             <div id="step2" class="padding_top_crea" style="display:none"></div>
                             <div id="step3">
                                 <div id="fixed_bracciale">
-                                    <div id="crea_bracciale">Create your<br>
+                                    <div id="crea_bracciale" style="display: none;">Create your<br>
                                         <div>Composable Classic</div>
                                     </div>
-                                    <div id="riepilogo_bracciale">
+                                    <div id="riepilogo_bracciale" style="display: none;">
                                         <div id="rie_tot">Base € 12.2 + 0 Link € 0 = <b>€ 15.20</b></div>
                                         <div id="active_riepilogo_bracciale">
                                         </div>
@@ -145,7 +145,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="conf_suggerimento">
+                                    <div id="conf_suggerimento" style="display: none;">
                                         <div class="msg_close"></div>
                                         <div class="msg_trascina"></div>
                                         <div class="msg_text">Drag the link to the bracelet</div>
@@ -189,7 +189,7 @@
                                             <div id="link_8033497304643" class="tessera" sku="8033497304643" imgsku="https://www.nomination.com/media/configurator/composable/big/8033497304643.png" cod_int="332501 01" nome=" Zodiac Link Aries with Birthstone" materiale="Sterling Silver" price="28.0000"
                                                 fprice="28" double="0" incisible="0" righe_inc="0" max_char="null" style="background-image: url(https://www.nomination.com/media/configurator/composable/big/8033497304643.png), url(https://www.nomination.com/skin/frontend/eurostep/core/img/tessera_base_drag_big.png);"></div>
                                         </div>
-                                        <div id="tessera_detail">
+                                        <div id="tessera_detail" style="display: none">
                                             <div id="imgdetail" class="tesseradrag drag">
                                             </div>
                                             <div id="textdetail">
@@ -208,6 +208,57 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
     <script>
+        var avv_cambio_pagina = 'Warning! Your bracelet will not be saved if you leave this page.';
+        var avv_wishlist = 'This bracelet has been added to your Wish List.';
+        var avv_misura = 'Please choose the size of your bracelet.';
+        var avv_zerolink = 'Drag 1 Link to create your bracelet';
+        var avv_zerocharm = 'Drag 1 Charm to create your bracelet';
+        var avv_zerocubi = 'Drag 1 Cube to create your bracelet';
+        var avv_almeno2link = 'Drag at least 2 Links to create your bracelet';
+        var avv_almeno2charm = 'Drag at least 2 Charms to create your bracelet';
+        var avv_almeno2cubi = 'Drag at least 2 Cubes to create your bracelet';
+        var avv_salva = 'When you have finished your bracelet click SAVE.';
+        var avv_email = 'Your bracelet has been sent to your friend.';
+        var btn_rimani = 'Stay on page';
+        var btn_abbandona = 'Close page';
+        var btn_salva = 'Save in wishlist';
+        var btn_store_locator = 'STORE<BR/>LOCATOR';
+        var url_store_locator = 'STORE-LOCATOR';
+        var color_acciaio = 'Colour: STAINLESS STEEL';
+        var color_oro = 'Colour: GOLD';
+        var color_ororosa = 'Colour: ROSE GOLD';
+        var color_dark = 'Colour: BLACK';
+        var str_colore = 'Colour: '
+        var str_codice = 'Code: ';
+        var str_posizione = 'Position: ';
+        var str_da = 'from';
+        var str_basebracciale = 'Base bracelet';
+        var str_bracciale = 'Bracelet';
+        var str_base = 'Base';
+        var str_necklace = 'Necklace';
+        var str_links = 'links';
+        var str_charms = 'charms';
+        var str_pendente = 'pendants';
+        var str_cubi = 'cubi';
+        var str_tot_dot = 'Tot.';
+        var fil_ordina_per = 'Sort by:&nbsp;';
+        var fil_prezzo = 'Price: €';
+        var str_create_your = 'Create your';
+        var str_com_classic = 'Composable Classic';
+        var str_com_big = 'Composable Big';
+        var str_mbb_short = 'Short MyBonBons';
+        var str_mbb_long = 'Long MyBonBons';
+        var str_cub_classic = 'Cubiamo Classic';
+        var str_cub_big_long = 'Cubiamo Big Long';
+        var str_cub_arg = 'Cubiamo Classic Silver';
+        var str_cub_big_short = 'Cubiamo Big';
+        var str_invia_mail_amico = 'Send your composition to a friend:';
+        var str_il_tuo_nome = 'Your Name';
+        var str_la_tua_mail = 'Your mail';
+        var str_mail_destinatario = 'Recipient mail';
+        var str_send_email = 'SEND EMAIL';
+        var str_alert_lose_incision = 'Are you sure you want to continue? You will lose the settings made.';
+        var str_seimia = 'Create your<br><div>SeiMia necklace</div>';
         var PrezzoBaseGratis = 35;
         var NumeroMinimoLink = 3;
         var ConfStoreMinimoNLink = false;

@@ -2404,69 +2404,6 @@ function ComponiBaseBracciale() {
                 jQuery('#dettaglio_over').hide();
             }
         }
-        jQuery('.tessera_base').mouseleave(function() {
-            if (!isMobile) {
-                var link_width = '50px';
-                var tessera_width = '110px';
-                var width_next = '50px';
-                var width_tessera_next = '110px';
-                var width_prev = '50px';
-                var width_tessera_prev = '110px';
-                var link_mol = 1;
-                var next_mol = 1;
-                var prev_mol = 1;
-                if (jQuery(this).attr('double') == '1') {
-                    link_width = '100px';
-                    tessera_width = '220px';
-                    link_mol = 2;
-                }
-                if (jQuery(this).prev('.tessera_base').attr('double') == '1') {
-                    width_prev = '100px';
-                    width_tessera_prev = '220px';
-                    prev_mol = 2;
-                }
-                if (jQuery(this).next().attr('double') == '1') {
-                    width_next = '100px';
-                    width_tessera_next = '220px';
-                    next_mol = 2;
-                }
-                jQuery(this).stop().animate({
-                    height: '96px',
-                    width: link_width,
-                    marginTop: '0px'
-                }, "fast");
-                jQuery(this).prev('.tessera_base').stop().animate({
-                    height: '96px',
-                    width: width_prev,
-                    marginTop: '0px'
-                }, "fast");
-                jQuery(this).next().stop().animate({
-                    height: '96px',
-                    width: width_next,
-                    marginTop: '0px'
-                }, "fast");
-
-                jQuery(this).find('.tesserabracciale').stop().animate({
-                    height: '134px',
-                    width: tessera_width,
-                    top: tes_top,
-                    left: tes_left * link_mol
-                }, 'fast');
-                jQuery(this).next().find('.tesserabracciale').stop().animate({
-                    height: '134px',
-                    width: width_tessera_next,
-                    top: tes_top,
-                    left: tes_left * next_mol
-                }, 'fast');
-                jQuery(this).prev().find('.tesserabracciale').stop().animate({
-                    height: '134px',
-                    width: width_tessera_prev,
-                    top: tes_top,
-                    left: tes_left * prev_mol
-                }, 'fast');
-                jQuery('#dettaglio_over').hide();
-            }
-        });
     });
 
     jQuery('.tessera_base').mouseleave(function() {
