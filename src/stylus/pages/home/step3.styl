@@ -39,9 +39,11 @@ body {
         height: 131px;
         margin: 0 auto;
         .tessera_base_big_dark {
-          background-image: url('../img/bracciale/tessera_base_big_dark.png');
+          // background-image: url('../img/bracciale/tessera_base_big_dark.png');
+          // background-image: url('../img/bracciale/white_tile.png');
+          background-image: url('../img/bracciale/title_origin.png');
           &.tessera_base_link_big {
-            background-image: url('../img/bracciale/tessera_base_link_big.png');
+            // background-image: url('../img/bracciale/tessera_base_link_big.png');
           }
           .stella_incisione {
             position: relative;
@@ -74,6 +76,7 @@ body {
             width: 46px;
             height: 96px;
             z-index: 99;
+            cursor: pointer;
           }
         }
         #tooltip_incisione {
@@ -149,7 +152,8 @@ body {
           width: 137px;
           height: 166px;
           background-position: center top;
-          background-size: 137px 166px;
+          background-size: 50px 50px;
+          background-position-y 20px;
         }
         #textdetail {
           position: absolute;
