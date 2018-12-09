@@ -43,7 +43,7 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     // 'style-loader',
-                    'css-loader',
+                    'css-loader?url=false',
                     {
                         loader: 'stylus-loader',
                         options: {
@@ -54,18 +54,18 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader?url=false'],
             },
-            {
-                test: /\.(png|jpg|jpeg|gif|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
-                loader: 'file-loader',
-                options: {
-                    emitFile: true,
-                    publicPath: '../img/',
-                    name: '[hash].[ext]?v=1',
-                    outputPath: './img/'
-                }
-            }
+            // {
+            //     test: /\.(png|jpg|jpeg|gif|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+            //     loader: 'file-loader',
+            //     options: {
+            //         emitFile: true,
+            //         publicPath: '../img/',
+            //         name: '[hash].[ext]?v=1',
+            //         outputPath: './img/'
+            //     }
+            // }
         ]
     },
     plugins: [
