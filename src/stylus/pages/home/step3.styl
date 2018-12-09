@@ -38,45 +38,46 @@ body {
         text-align: center;
         height: 131px;
         margin: 0 auto;
+        .stella_incisione {
+          position: relative;
+          display: none;
+          margin: 0 auto;
+          top: -28px;
+          width: 19px;
+          height: 19px;
+          background: url('../img/bracciale/stella_incisione.png') no-repeat;
+          background-size: contain;
+          cursor: pointer;
+          z-index: 9999;
+        }
+        .tesserabracciale {
+          position: absolute;
+          display: block;
+          width: 110px;
+          height: 134px;
+          top: -23px;
+          left: -30px;
+          background-image: none;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center top;
+        }
+        .handletessera {
+          position: absolute;
+          left: 2px;
+          top: 0px;
+          width: 46px;
+          height: 96px;
+          z-index: 99;
+          cursor: pointer;
+        }
+        .tessera_base_link {
+          background-image: url('../img/bracciale/j/skin/tessera_base_link.png');
+        }
         .tessera_base_big_dark {
-          // background-image: url('../img/bracciale/tessera_base_big_dark.png');
-          // background-image: url('../img/bracciale/white_tile.png');
-          background-image: url('../img/bracciale/title_origin.png');
+          background-image: url('../img/bracciale/j/tessera_base.png');
           &.tessera_base_link_big {
             // background-image: url('../img/bracciale/tessera_base_link_big.png');
-          }
-          .stella_incisione {
-            position: relative;
-            display: none;
-            margin: 0 auto;
-            top: -28px;
-            width: 19px;
-            height: 19px;
-            background: url('../img/bracciale/stella_incisione.png') no-repeat;
-            background-size: contain;
-            cursor: pointer;
-            z-index: 9999;
-          }
-          .tesserabracciale {
-            position: absolute;
-            display: block;
-            width: 110px;
-            height: 134px;
-            top: -23px;
-            left: -30px;
-            background-image: none;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center top;
-          }
-          .handletessera {
-            position: absolute;
-            left: 2px;
-            top: 0px;
-            width: 46px;
-            height: 96px;
-            z-index: 99;
-            cursor: pointer;
           }
         }
         #tooltip_incisione {
@@ -152,8 +153,7 @@ body {
           width: 137px;
           height: 166px;
           background-position: center top;
-          background-size: 50px 50px;
-          background-position-y 20px;
+          background-size: 137px 166px;
         }
         #textdetail {
           position: absolute;

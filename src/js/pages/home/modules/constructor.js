@@ -18,13 +18,14 @@ export default class Constructor {
         let OffsetToolTip = -20;
         let ArrIncisioni = Array();
         let ScrollBar = false;
+        let size;
         // Controllo caricamenti
         let mustBeBlocked = false;
         this.init();
     }
     init() {
+        this.SettaPosizioniTessere(TipoBracciale);
         this.events();
-        // this.SettaPosizioniTessere("big");
         this.RefreshSlideFiltri();
         this.initDefault();
     }
@@ -40,12 +41,7 @@ export default class Constructor {
     events() {
         const self = this;
         const isMobile = self.isMobile;
-        var tes_top = -13;
-        var tes_left = -30;
-        var tes_top1 = -14;
-        var tes_left1 = -35;
-        var tes_top_o = -16;
-        var tes_left_o = -35;
+        const dimension = self.size;
         jQuery('.tessera').mouseenter(function() {
             if (!isMobile) {
                 //if (!DragInCorso) {
@@ -140,20 +136,20 @@ export default class Constructor {
                 jQuery(this).find('.tesserabracciale').stop().animate({
                     height: '160px',
                     width: tessera_width,
-                    top: tes_top_o + meno_top,
-                    left: (tes_left_o * link_mol) + meno_left
+                    top: dimension.tes_top_o + meno_top,
+                    left: (dimension.tes_left_o * link_mol) + meno_left
                 }, 'fast');
                 jQuery(this).prev().find('.tesserabracciale').stop().animate({
                     height: '145px',
                     width: width_tessera_prev,
-                    top: tes_top1,
-                    left: tes_left1 * prev_mol
+                    top: dimension.tes_top1,
+                    left: dimension.tes_left1 * prev_mol
                 }, 'fast');
                 jQuery(this).next().find('.tesserabracciale').stop().animate({
                     height: '145px',
                     width: width_tessera_next,
-                    top: tes_top1,
-                    left: tes_left1 * next_mol
+                    top: dimension.tes_top1,
+                    left: dimension.tes_left1 * next_mol
                 }, 'fast');
                 var j = jQuery(this).attr('nrbase');
                 jQuery('#dettaglio_over').hide();
@@ -191,38 +187,38 @@ export default class Constructor {
                     next_mol = 2;
                 }
                 jQuery(this).stop().animate({
-                    height: '50px',
+                    height: '96px',
                     width: link_width,
                     marginTop: '0px'
                 }, "fast");
                 jQuery(this).prev('.tessera_base').stop().animate({
-                    height: '50px',
+                    height: '96px',
                     width: width_prev,
                     marginTop: '0px'
                 }, "fast");
                 jQuery(this).next().stop().animate({
-                    height: '50px',
+                    height: '96px',
                     width: width_next,
                     marginTop: '0px'
                 }, "fast");
 
                 jQuery(this).find('.tesserabracciale').stop().animate({
-                    height: '42px',
+                    height: '134px',
                     width: tessera_width,
-                    top: tes_top,
-                    left: tes_left * link_mol
+                    top: dimension.tes_top,
+                    left: dimension.tes_left * link_mol
                 }, 'fast');
                 jQuery(this).next().find('.tesserabracciale').stop().animate({
-                    height: '42px',
+                    height: '134px',
                     width: width_tessera_next,
-                    top: tes_top,
-                    left: tes_left * next_mol
+                    top: dimension.tes_top,
+                    left: dimension.tes_left * next_mol
                 }, 'fast');
                 jQuery(this).prev().find('.tesserabracciale').stop().animate({
-                    height: '42px',
+                    height: '134px',
                     width: width_tessera_prev,
-                    top: tes_top,
-                    left: tes_left * prev_mol
+                    top: dimension.tes_top,
+                    left: dimension.tes_left * prev_mol
                 }, 'fast');
                 jQuery('#dettaglio_over').hide();
             }
@@ -248,8 +244,8 @@ export default class Constructor {
                 jQuery(this).parent().find('.tesserabracciale').stop().animate({
                     height: '160px',
                     width: tessera_width,
-                    top: tes_top_o,
-                    left: tes_left_o * link_mol
+                    top: dimension.tes_top_o,
+                    left: dimension.tes_left_o * link_mol
                 }, 'fast');
             },
             out: function(event, ui) {
@@ -262,15 +258,15 @@ export default class Constructor {
                     link_mol = 2;
                 }
                 jQuery(this).parent().stop().animate({
-                    height: '50px',
+                    height: '96px',
                     width: link_width,
                     marginTop: '0px'
                 }, "fast");
                 jQuery(this).parent().find('.tesserabracciale').stop().animate({
-                    height: '42px',
+                    height: '134px',
                     width: tessera_width,
-                    top: tes_top,
-                    left: tes_left * link_mol
+                    top: dimension.tes_top,
+                    left: dimension.tes_left * link_mol
                 }, 'fast');
             },
             drop: function(event, ui) {
@@ -289,7 +285,7 @@ export default class Constructor {
                 var j = parseInt(jQuery(this).parent().attr('nrbase'));
                 var mol_left = 1;
                 if ((double == 0) || (j < NrLink - 1) || (ObjBracciale[j].dbl == 1)) {
-                    switch ('big') {
+                    switch (TipoBracciale) {
                         case 'classic':
                             if (double == 1) {
                                 if (jQuery(this).parent().attr('double') == '1') {
@@ -327,15 +323,15 @@ export default class Constructor {
 
                     jQuery(this).parent().find(".tesserabracciale").css('background-image', 'url(' + imgsku + ')');
                     jQuery(this).parent().stop().animate({
-                        height: '50px',
+                        height: '96px',
                         width: link_width,
                         marginTop: '0px'
                     }, 'fast');
                     jQuery(this).parent().find('.tesserabracciale').stop().animate({
-                        height: '42px',
+                        height: '134px',
                         width: tessera_width,
-                        top: tes_top,
-                        left: tes_left * mol_left
+                        top: dimension.tes_top,
+                        left: dimension.tes_left * mol_left
                     }, "fast");
                     jQuery(this).parent().prev().css('z-index', '');
                     jQuery(this).parent().next().css('z-index', '');
@@ -700,49 +696,59 @@ export default class Constructor {
 	 */
     }
     SettaPosizioniTessere(TipoBracciale) {
+        const self = this;
+        let size = {
+            tes_top: -24,
+            tes_left: -31,
+            tes_top1: -26,
+            tes_left1: -33,
+            tes_top_o: -28,
+            tes_left_o: -37,
+        };
         switch (TipoBracciale) {
             case 'classic':
-                tes_top = -23;
-                tes_left = -30;
-                tes_top1 = -25;
-                tes_left1 = -33;
-                tes_top_o = -26;
-                tes_left_o = -35;
+                size = {
+                    tes_top: -23,
+                    tes_left: -30,
+                    tes_top1: -25,
+                    tes_left1: -33,
+                    tes_top_o: -26,
+                    tes_left_o: -35,
+                };
                 break;
             case 'big':
-                tes_top = -13;
-                tes_left = -30;
-                tes_top1 = -14;
-                tes_left1 = -35;
-                tes_top_o = -16;
-                tes_left_o = -35;
+                size = {
+                    tes_top: -13,
+                    tes_left: -30,
+                    tes_top1: -14,
+                    tes_left1: -35,
+                    tes_top_o: -16,
+                    tes_left_o: -35,
+                };
                 break;
             case 'mbbshort':
             case 'mbblong':
-                tes_top = -24;
-                tes_left = -31;
-                tes_top1 = -26;
-                tes_left1 = -33;
-                tes_top_o = -28;
-                tes_left_o = -37;
+                size = {
+                    tes_top: -24,
+                    tes_left: -31,
+                    tes_top1: -26,
+                    tes_left1: -33,
+                    tes_top_o: -28,
+                    tes_left_o: -37
+                };
                 break;
             case 'seimia':
-                tes_top = 6;
-                tes_left = -31;
-                tes_top1 = 8;
-                tes_left1 = -33;
-                tes_top_o = 10;
-                tes_left_o = -37;
-                break;
-            default:
-                tes_top = -24;
-                tes_left = -31;
-                tes_top1 = -26;
-                tes_left1 = -33;
-                tes_top_o = -28;
-                tes_left_o = -37;
+                size = {
+                    tes_top: 6,
+                    tes_left: -31,
+                    tes_top1: 8,
+                    tes_left1: -33,
+                    tes_top_o: 10,
+                    tes_left_o: -37,
+                }
                 break;
         }
+        self.size = size;
     }
     ChiudiBarraRiepilogo() {
         const self = this;
@@ -757,7 +763,7 @@ export default class Constructor {
         const self = this;
         var pngtessera = 'tessera_base_drag';
         var addclass = '';
-        switch ('big') {
+        switch (TipoBracciale) {
             case 'classic':
                 pngtessera = 'tessera_base_drag';
                 if (ObjBracciale[j].dbl == 1) {
@@ -861,7 +867,6 @@ export default class Constructor {
     RimuoviTessera(id, silent) {
         const self = this;
         var j = 0;
-        var TipoBracciale = 'big';
         if (jQuery(id).hasClass('x_tessera')) {
             j = jQuery(id).attr('nrtes');
             var idpar = jQuery(this).parent();
@@ -964,7 +969,6 @@ export default class Constructor {
     CalcolaRiepilogo() {
         const self = this;
         var strhtml = '';
-        var TipoBracciale = 'big';
         jQuery('#riepilogo_tessere').html('<div class="div_riepilogo">');
         jQuery('#m_elenco_tessere').html('');
         var TotLink = 0;

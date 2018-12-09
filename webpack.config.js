@@ -77,10 +77,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "css/style.min.css",
         }),
-        // new CopyWebpackPlugin([{
-        //     from: "src/img/",
-        //     to: "img/"
-        // }, ]),
+        new CopyWebpackPlugin([{
+            from: "src/img/",
+            to: "img/"
+        }, ]),
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             optipng: {
