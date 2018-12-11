@@ -112,7 +112,7 @@ export default class Constructor {
                     width_tessera_prev = '238px';
                     prev_mol = 2;
                 }
-                if (jQuery(this).next().attr('double') == '1') {
+                if (jQuery(this).next('.tessera_base').attr('double') == '1') {
                     width_next = '108px';
                     width_tessera_next = '238px';
                     next_mol = 2;
@@ -127,7 +127,7 @@ export default class Constructor {
                     width: width_prev,
                     marginTop: '-2px'
                 }, "fast");
-                jQuery(this).next().stop().animate({
+                jQuery(this).next('.tessera_base').stop().animate({
                     height: '104px',
                     width: width_next,
                     marginTop: '-2px'
@@ -139,13 +139,13 @@ export default class Constructor {
                     top: dimension.tes_top_o + meno_top,
                     left: (dimension.tes_left_o * link_mol) + meno_left
                 }, 'fast');
-                jQuery(this).prev().find('.tesserabracciale').stop().animate({
+                jQuery(this).prev('.tessera_base').find('.tesserabracciale').stop().animate({
                     height: '145px',
                     width: width_tessera_prev,
                     top: dimension.tes_top1,
                     left: dimension.tes_left1 * prev_mol
                 }, 'fast');
-                jQuery(this).next().find('.tesserabracciale').stop().animate({
+                jQuery(this).next('.tessera_base').find('.tesserabracciale').stop().animate({
                     height: '145px',
                     width: width_tessera_next,
                     top: dimension.tes_top1,
@@ -181,7 +181,7 @@ export default class Constructor {
                     width_tessera_prev = '220px';
                     prev_mol = 2;
                 }
-                if (jQuery(this).next().attr('double') == '1') {
+                if (jQuery(this).next('.tessera_base').attr('double') == '1') {
                     width_next = '100px';
                     width_tessera_next = '220px';
                     next_mol = 2;
@@ -196,7 +196,7 @@ export default class Constructor {
                     width: width_prev,
                     marginTop: '0px'
                 }, "fast");
-                jQuery(this).next().stop().animate({
+                jQuery(this).next('.tessera_base').stop().animate({
                     height: '96px',
                     width: width_next,
                     marginTop: '0px'
