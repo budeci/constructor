@@ -17,11 +17,11 @@ export default class Constructor {
 
         $('.tessera_base').mouseenter(function() {
             var link_width = '65px';
-            var tessera_width = '55px';
+            var tessera_width = '56px';
             var width_next = '65px';
-            var width_tessera_next = '55px';
+            var width_tessera_next = '56px';
             var width_prev = '65px';
-            var width_tessera_prev = '55px';
+            var width_tessera_prev = '56px';
             $(this).stop().animate({
                 width: link_width,
             }, "fast");
@@ -32,19 +32,19 @@ export default class Constructor {
                 width: width_next,
             }, "fast");
             $(this).find('.tesserabracciale').stop().animate({
-                height: '55px',
+                height: '56px',
                 width: tessera_width,
                 top: dimension.tes_top_o,
                 left: dimension.tes_left_o
             }, 'fast');
             $(this).prev('.tessera_base').find('.tesserabracciale').stop().animate({
-                height: '55px',
+                height: '56px',
                 width: width_tessera_prev,
                 top: dimension.tes_top1,
                 left: dimension.tes_left1
             }, 'fast');
             $(this).next('.tessera_base').find('.tesserabracciale').stop().animate({
-                height: '55px',
+                height: '56px',
                 width: width_tessera_next,
                 top: dimension.tes_top1,
                 left: dimension.tes_left1
@@ -53,11 +53,11 @@ export default class Constructor {
         });
         $('.tessera_base').mouseleave(function() {
             var link_width = '60px';
-            var tessera_width = '50px';
+            var tessera_width = '51px';
             var width_next = '60px';
-            var width_tessera_next = '50px';
+            var width_tessera_next = '51px';
             var width_prev = '60px';
-            var width_tessera_prev = '50px';
+            var width_tessera_prev = '51px';
             $(this).stop().animate({
                 width: link_width,
             }, "fast");
@@ -69,19 +69,19 @@ export default class Constructor {
             }, "fast");
 
             $(this).find('.tesserabracciale').stop().animate({
-                height: '50px',
+                height: '51px',
                 width: tessera_width,
                 top: dimension.tes_top,
                 left: dimension.tes_left
             }, 'fast');
             $(this).next().find('.tesserabracciale').stop().animate({
-                height: '50px',
+                height: '51px',
                 width: width_tessera_next,
                 top: dimension.tes_top,
                 left: dimension.tes_left
             }, 'fast');
             $(this).prev().find('.tesserabracciale').stop().animate({
-                height: '50px',
+                height: '51px',
                 width: width_tessera_prev,
                 top: dimension.tes_top,
                 left: dimension.tes_left
@@ -92,7 +92,7 @@ export default class Constructor {
         $(".drag").draggable({
             containment: 'document',
             revert: 'invalid',
-            // handle: 'div.drag',
+            //handle: 'div.img',
             helper: 'clone',
             scroll: false,
             zIndex: '100',
@@ -108,29 +108,29 @@ export default class Constructor {
             activeClass: 'drag-active',
             over: function(event, ui) {
                 var link_width = '65px';
-                var tessera_width = '55px';
+                var tessera_width = '56px';
                 $(this).parent().stop().animate({
                     //height: '65px',
                     width: link_width,
                 }, "fast");
                 $(this).parent().find('.tesserabracciale').stop().animate({
-                    height: '55px',
+                    height: '56px',
                     width: tessera_width,
                     top: dimension.tes_top_o,
                     left: dimension.tes_left_o
                 }, 'fast');
             },
             out: function(event, ui) {
-                var link_width = '50px';
+                var link_width = '51px';
                 var tessera_width = '110px';
                 var link_mol = 1;
                 $(this).parent().stop().animate({
-                    //height: '50px',
+                    //height: '51px',
                     width: '60px',
                 }, "fast");
                 $(this).parent().find('.tesserabracciale').stop().animate({
-                    height: '50px',
-                    width: '50px',
+                    height: '51px',
+                    width: '51px',
                     top: dimension.tes_top,
                     left: dimension.tes_left
                 }, 'fast');
@@ -145,12 +145,12 @@ export default class Constructor {
 
                 $(this).parent().find(".tesserabracciale").css('background-image', 'url(' + imgsku + ')');
                 $(this).parent().stop().animate({
-                    //height: '50px',
+                    //height: '51px',
                     width: link_width,
                 }, 'fast');
                 $(this).parent().find('.tesserabracciale').stop().animate({
-                    //height: '50px',
-                    width: '50px',
+                    height: '51px',
+                    width: '51px',
                     top: dimension.tes_top,
                     left: dimension.tes_left
                 }, "fast");
@@ -159,6 +159,7 @@ export default class Constructor {
                 $(this).parent().css('z-index', '1');
                 const res = ObjBracciale.filter(item => item.position != j);
                 res.push({
+                    idx: j,
                     position: j,
                     code: code,
                     price: price,
@@ -189,6 +190,7 @@ export default class Constructor {
                 $(ui.item).next().css('z-index', '');
                 $(ui.item).css('z-index', '1');
                 $('.tessera_base').mouseleave();
+                self.SortObjBracciale();
             },
             update: function(event, ui) {
                 ui.item.unbind("click");
@@ -208,11 +210,11 @@ export default class Constructor {
 
     SettaPosizioniTessere() {
         return {
-            tes_top: 5,
+            tes_top: 4,
             tes_left: 5,
-            tes_top1: 5,
+            tes_top1: 4,
             tes_left1: 5,
-            tes_top_o: 5,
+            tes_top_o: 4,
             tes_left_o: 5,
         };
     }
@@ -226,10 +228,10 @@ export default class Constructor {
 
     SortObjBracciale() {
         const res = ObjBracciale.map(item => {
-            const idx = $(`#base_${item.position}`).index();
+            const idx = $(document).find(`#base_${item.idx}`).index();
             return {
+                ...item,
                 position: idx,
-                ...item
             }
         });
         ObjBracciale = orderBy(res, 'position', 'asc');

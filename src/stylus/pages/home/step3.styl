@@ -4,9 +4,9 @@ body {
         width: 40px;
         cursor: pointer;
     }
-    > .tessera {
-        width: 55px;
-        height: 55px;
+    > .img {
+        width: 51px;
+        height: 51px;
         display: block;
         overflow: hidden;
         img {
@@ -19,7 +19,7 @@ body {
     background-color: #FFFFFF;
     min-height: 600px;
     margin-bottom: 300px;
-    .tessera_base, .tessera_base_dark {
+    .tessera_base {
         position: relative;
         display: block;
         float: left;
@@ -35,7 +35,8 @@ body {
     #fixed_bracciale {
         position: relative;
         z-index: 99;
-        margin-top: 200px;
+        width: 907px;
+        margin: 200px auto 0;
         #container_bracciale {
             // position: absolute;
             font-size: 0;
@@ -70,8 +71,8 @@ body {
                 .tesserabracciale {
                     position: absolute;
                     display: block;
-                    width: 50px;
-                    height: 50px;
+                    width: 51px;
+                    height: 51px;
                     top: 4px;
                     left: -30px;
                     background-image: none;
@@ -118,13 +119,61 @@ body {
                 margin-top: 45px;
                 margin-bottom: 240px;
                 font-size: 0;
+                text-align: center;
                 .tessera {
                     display: inline-block;
-                    width: 55px;
-                    cursor: pointer;
-                    margin: 0 4px;
-                    img {
+                    text-align: center;
+                    position: relative;
+                    width: 70px;
+                    min-height: 120px;
+                    vertical-align: top;
+                    &:hover {
+                        &:first-of-type {
+                            .produs {
+                                margin-left: -35%;
+                            }
+                        }
+                        .produs {
+                            z-index: 100;
+                            width: 170%;
+                            margin-left: -34.5%;
+                            box-shadow: rgba(182,182,182,0.5) 0px 2px 4px 0px;
+                            .title {
+                                visibility: visible;
+                            }
+                            .price {
+                                visibility: visible;
+                            }
+                        }
+                    }
+                    .produs {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
                         width: 100%;
+                        height: 110%;
+                        align-items: flex-end;
+                        justify-content: center;
+                        display: flex;
+                        background: #FEFEFC;
+                        font-size: 14px;
+                        border-radius: 5px;
+                        padding: 10px 5px;
+                        .title {
+                            visibility: hidden;
+                        }
+                        .price {
+                            visibility: hidden;
+                        }
+                        .img {
+                            display: block;
+                            width: 55px;
+                            cursor: pointer;
+                            margin: 10px auto 0;
+                            img {
+                                width: 100%;
+                            }
+                        }
                     }
                 }
             }
