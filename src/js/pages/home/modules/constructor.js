@@ -97,7 +97,7 @@ export default class Constructor {
             scroll: false,
             zIndex: '100',
             opacity: 0.6,
-            appendTo: 'body',
+            appendTo: '#step3',
             start: function(event, ui) {},
             stop: function() {}
         });
